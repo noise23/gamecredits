@@ -609,5 +609,5 @@ inline bool operator>=(const CBigNum& a, const CBigNum& b) { return (BN_cmp(a.cg
 inline bool operator<(const CBigNum& a, const CBigNum& b)  { return (BN_cmp(a.cget(), b.cget()) < 0); }
 inline bool operator>(const CBigNum& a, const CBigNum& b)  { return (BN_cmp(a.cget(), b.cget()) > 0); }
 
-#endif
- 
+#endif 
+

@@ -1,8 +1,8 @@
-GameCredits Core version *0.15.2* is now available from:
+GameCredits Core version *0.15.4* is now available from:
 
-  <https://www.gamecredits.com>
+  <https://github.com/gamecredits-project/GameCredits/releases>
 
-This is a major release introducing additional security features.
+This is a release that covers the seasonal change of Komodo notaries among other fixes. It is a MANDATORY UPGRADE.
 
 Please report bugs using the issue tracker at GitHub:
 
@@ -10,7 +10,9 @@ Please report bugs using the issue tracker at GitHub:
 
 To receive security and update notifications, please subscribe to:
 
-  <https://www.gamecredits.com>
+  <https://www.gamecredits.org>
+  <https://twitter.com/gamecredits>
+  <https://discordapp.com/invite/vDEYBTc/>
 
 How to Upgrade
 ==============
@@ -20,10 +22,10 @@ shut down (which might take a few minutes for older versions), then run the
 installer (on Windows) or just copy over `/Applications/GameCredits-Qt` (on Mac)
 or `gamecreditsd`/`gamecredits-qt` (on Linux).
 
-The first time you run version 0.15.2 or higher, you may be asked to re-index your blockchain. This process will take anywhere from a few minutes to
+The first time you run version 0.15.4, you may be asked to re-index your blockchain. This process will take anywhere from a few minutes to
 several hours, depending on the speed of your machine.
 
-There are no upgrades compared to 0.15.1 other than the security updates, which require transaction indexing at this time. 
+This is a MANDATORY UPGRADE in order to remain on the correct chain of GameCredits (notarized by Komodo). Services must upgrade before block #2433888 to be on the correct chain at activation.
 
 Compatibility
 ==============
@@ -37,36 +39,35 @@ frequently tested on them.
 Notable changes
 ===============
 
-Komodo Notary Integration
+Komodo Seasonal Changes
 -------------------------
-We have integrated our software with Komodo's ecosystem to notarize our blockchain. This allows our blockchain to be "backed up" on the Komodo chain which we can restore from later (as long as we have at least one peer with the correct chain). The integration is expected to stop rollbacks of blocks due to consensus attacks that were observed in early May 2018.
+Komodo's notaries are elected once a year and have a period of 1 year to service the network. New notaries were elected that go into effect on July 15th, 2019. This release ensures that GameCredits remains notarized throughout the regime change period and until the next notary elections.
 
-
-Transaction indexing enabled by default
+Komodo dPoW Confirmations
 -------------------------
-As part of the security features being introduced with the Komodo notary integration, we have turned transaction indexing on by default. This causes a reindex of the blocks on the user's device in case the user was not already indexing transactions. This process can take several hours to complete depending on the speed of the machine.
+We have enabled dPoW confirmations by default. When a transaction is accepted into a block on the network, it will receive 1 confirmation. The GameCredits daemon will continue to return this single confirmation until a notarization takes place. Once a notarization happens, the true confirmations will be returned. This feature allows services to accept GameCredits in a very secure manner - by ensuring that Komodo has notarized a transaction before crediting balances. As we mentioned in a previous release, Komodo's notarization system prevents 51% attacks on GameCredits.
 
-
-Message Signing String Bug fix
+Working Testnet
 -------------------------
+Testnet is fixed and working in this release. We request anyone developing on GameCredits to please run a testnet node and mine against it. You can use Raspberry Pi 3B's or higher to mine and receive testnet coins.
 
-In 0.15.1, the message signing string was incorrectly written as "gamecredits Signed Message:". In 0.15.2, the string has been replaced with the correct version "GameCredits Signed Message:". Signed messages generated on 0.15.1 will fail verification on 0.15.2. However, older signed messages (from pre-0.15.1) will continue to work on 0.15.2.
-
-Segwit and CSV Signaling Period Changed
+Updated DNS Seeders
 -------------------------
+We have shifted the DNS seeder into the <https://gamecredits.network> umbrella of services. Similarly, a testnet seeder has been launched and put under the same domain. Functionality is unaffected by this change.
 
-Segwit and CSV signaling has moved from April 2019 to July 2018, lasting 1 year. An overlap period between April 2019 and July 2019 is present to ensure activation.
-
-0.15.2 Change log
+0.15.4 Change log
 ====================
 
--  Komodo notary integration
--  Transaction indexing is enabled by default
--  Message signing string has been updated to the correct one
--  Testnet and Regtest have been reintroduced with new genesis blocks
--  Transactions are now version 2
--  Getinfo now reports notarization status
--  Segwit and CSV signaling starts July 15, 2018 and lasts one year
+-  update seeds
+-  add new pubkey activation code to GAME for KMD hardfork.
+-  add dPoW conf functionality into GAME
+-  add season 3 notaries
+
+
+0.15.4 Known Issues
+====================
+
+-  Regtest network remains broken, but will be fixed in a future update.
 
 Credits
 =======
@@ -74,6 +75,5 @@ Credits
 Thanks to everyone who directly contributed to this release:
 
 - Samad Sajanlal
-- jl777 of Komodo
-- Vuksan Simunovic of GameCredits, Inc
-- Nikola Divic of GameCredits, Inc
+- blackjok3rtt
+- dukeleto

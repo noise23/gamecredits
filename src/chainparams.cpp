@@ -79,7 +79,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP34Height = 1;
         consensus.BIP34Hash = uint256S("2bcc081187bc9ccfda61584d0dc161167b0954a89c5685db79bd465e4ec8b4d3");
-        consensus.BIP65Height = 2062364; // estimated june 1, 2018
+        consensus.BIP65Height = 2062364;
         consensus.BIP66Height = 2062364;
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
         consensus.nPowTargetTimespan = 30 * 60; // every 30 minutes
@@ -103,10 +103,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1563062400; // July 14, 2019
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000001c94603cf1e94e37a");
+        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000002f3bcc4e2f4235bd3");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x0ce250921f2aab3037da2a9e94e7c24da6c4497958b7b0f0d3d4fcc9a1079b56"); //1900000
+        consensus.defaultAssumeValid = uint256S("0xc57e0c015160ac54ebdeb4b993bde44537ce920ca3abe7cf4863037f0e403c34"); //2413295
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -127,7 +127,7 @@ public:
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         // if you can seed, please let us know in github
-        vSeeds.emplace_back("dnsseed.btcgold.club", true);
+        vSeeds.emplace_back("dnsseed.gamecredits.network", true);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,38); // G
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5); // 3
@@ -155,15 +155,17 @@ public:
                 {  15332, uint256S("0xd492573db3624e06b80942ae08f907997f307d6da4e6c68ad40213864216d820")},
                 {  1036320, uint256S("0x8ae4c958bb817875c8dfa3f7f35044298d3f7a96c9e55d633f1c9618550bc577")},
                 {  1096772, uint256S("0x3dd493ea7be808f7fb60af5ea90d6ce4a56c34dc92affefea267d082af8b24d8")},
-                {  1981542, uint256S("0x12bf94f425d937a95b5c85c4d6dca3cc09658bb516a7e39dbd7fadd760a37133")},            }
+                {  1981542, uint256S("0x12bf94f425d937a95b5c85c4d6dca3cc09658bb516a7e39dbd7fadd760a37133")},
+                {  2413295, uint256S("0xc57e0c015160ac54ebdeb4b993bde44537ce920ca3abe7cf4863037f0e403c34")},
+            }
         };
 
          chainTxData = ChainTxData{
-            // Data as of block 2003677.
-            1527141776, // * UNIX timestamp of last known number of transactions
-            3291542,  // * total number of transactions between genesis and that timestamp
+            // RPC getchaintxstats as of block 2413299
+            1561408603, // * UNIX timestamp of last known number of transactions
+            3848960,  // * total number of transactions between genesis and that timestamp
                     //   (the tx=... number in the SetBestChain debug.log lines)
-            0.01     // * estimated number of transactions per second after that timestamp
+            0.01491895398885234     // * estimated number of transactions per second after that timestamp
         };
     }
 };
@@ -222,8 +224,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("gamecredits.co", true);
-        vSeeds.emplace_back("test.gamecredits.co", true);
+        vSeeds.emplace_back("dnsseedtest.gamecredits.network", true);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,196);
@@ -238,9 +239,15 @@ public:
         fRequireStandard = false;
         fMineBlocksOnDemand = false;
 
+        // Hardfork params
+        consensus.nSwitchKGW2 = 0;
+        consensus.nSwitchKGW2prefork = 0;
+        consensus.nSwitchKGW2postfork = 0;
+        consensus.nSwitchDGW = 1;
+
         checkpointData = (CCheckpointData) {
             {
-                {0, uint256S("0x")},
+                //{10000, uint256S("0x")},
             }
         };
 
@@ -308,9 +315,15 @@ public:
         fRequireStandard = false;
         fMineBlocksOnDemand = true; 
 
+        // Hardfork params
+        consensus.nSwitchKGW2 = 0;
+        consensus.nSwitchKGW2prefork = 0;
+        consensus.nSwitchKGW2postfork = 0;
+        consensus.nSwitchDGW = 1;
+
         checkpointData = (CCheckpointData) {
             {
-                {0, uint256S("0x")},
+                {0, uint256S("0x2574af5d531ba2c7b1b2994de62ae356699cb579cd744cf5dc8a565fce6db638")},
             }
         };
 
